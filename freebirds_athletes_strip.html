@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Athlete Strip</title>
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	jQuery(document).ready(function($){
+
+		$('.athletes').on('mouseover', function(){
+			$(this).css({
+				'opacity': .5
+			})	
+		})
+		
+		$('.athletes').on('mouseout',function(){
+			$(this).css({
+				'opacity' : 1
+			})
+		})
+		
+		$('a.fancybox').fancybox({type:'iframe'});
+		
+		//This is the jquery for the scroll bar
+		$(function() {
+	    //scrollpane parts
+	    var scrollPane = $( ".scroll-pane" ),
+	      scrollContent = $( ".scroll-content" );
+
+	    //build slider
+	    var scrollbar = $( ".scroll-bar" ).slider({
+	      slide: function( event, ui ) {
+	        if ( scrollContent.width() > scrollPane.width() ) {
+	          scrollContent.css( "margin-left", Math.round(
+	            ui.value / 100 * ( scrollPane.width() - scrollContent.width() )
+	          ) + "px" );
+	        } else {
+	          scrollContent.css( "margin-left", 0 );
+	        }
+	      }
+	    });
+
+	    //append icon to handle
+	    var handleHelper = scrollbar.find( ".ui-slider-handle" )
+	    .mousedown(function() {
+	      scrollbar.width( handleHelper.width() );
+	    })
+	    .mouseup(function() {
+	      scrollbar.width( "100%" );
+	    })
+	    .append( "<span class='ui-icon ui-icon-grip-dotted-vertical'></span>" )
+	    .wrap( "<div class='ui-handle-helper-parent'></div>" ).parent();
+
+	    //change overflow to hidden now that slider handles the scrolling
+	    scrollPane.css( "overflow", "hidden" );
+
+	    //size scrollbar and handle proportionally to scroll distance
+	    function sizeScrollbar() {
+	      var remainder = scrollContent.width() - scrollPane.width();
+	      var proportion = remainder / scrollContent.width();
+	      var handleSize = scrollPane.width() - ( proportion * scrollPane.width() );
+	      scrollbar.find( ".ui-slider-handle" ).css({
+	        width: handleSize,
+	        "margin-left": -handleSize / 2
+	      });
+	      handleHelper.width( "" ).width( scrollbar.width() - handleSize );
+	    }
+
+	    //reset slider value based on scroll content position
+	    function resetValue() {
+	      var remainder = scrollPane.width() - scrollContent.width();
+	      var leftVal = scrollContent.css( "margin-left" ) === "auto" ? 0 :
+	        parseInt( scrollContent.css( "margin-left" ) );
+	      var percentage = Math.round( leftVal / remainder * 100 );
+	      scrollbar.slider( "value", percentage );
+	    }
+
+	    //if the slider is 100% and window gets larger, reveal content
+	    function reflowContent() {
+	        var showing = scrollContent.width() + parseInt( scrollContent.css( "margin-left" ), 10 );
+	        var gap = scrollPane.width() - showing;
+	        if ( gap > 0 ) {
+	          scrollContent.css( "margin-left", parseInt( scrollContent.css( "margin-left" ), 10 ) + gap );
+	        }
+	    }
+
+	    //change handle position on window resize
+	    $( window ).resize(function() {
+	      resetValue();
+	      sizeScrollbar();
+	      reflowContent();
+	    });
+	    //init scrollbar size
+	    setTimeout( sizeScrollbar, 10 );//safari wants a timeout
+	  });
+		//end jquery for the scroll bar
+	});
+	
+	
+	</script>
+	<style type="text/css" media="screen">
+	
+	#container{
+		width: 950px;
+	}
+	
+	.scroll-pane{
+		width:950px;
+		overflow: hidden;
+	}
+	
+	.scroll-content{
+		width: 1900px;
+		height: 632px;
+		border: 1px solid black;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	/*.scroll-pane{
+			background-image: url('Assets/CoverPhoto.jpg');
+			position: relative;
+		}*/
+	
+	#background{
+		width: 100%;
+		position: fixed;
+	
+	}
+	
+	#josh_daiek{
+		left: 10px;
+		position: absolute;
+		bottom: 0px;
+	}
+	#kevin_omeara{
+		left: 225px;
+		bottom: 0px;
+		position: absolute;
+	}
+	#silas_chickeringayers{
+		left: 500px;
+		bottom: 0px;
+		position: absolute;
+	}
+	#lars_chickeringayers{
+		left: 650px;
+		bottom: 0px;
+		position: absolute;
+	}
+	#reine_barker{
+		left: 940px;
+		bottom: 0px;
+		position: absolute;
+	}
+	#lopez{
+		left: 1070px;
+		bottom: -100px;
+		position: absolute;
+	}
+	#wallner{
+		left: 1330px;
+		bottom: -100px;
+		position: absolute;
+		z-index: 0;
+	}
+	#white{
+		left: 1410px;
+		bottom: -130px;
+		position: absolute;
+		z-index: 1;
+	}
+	#drew_tabke{
+		left: 1625px;
+		bottom: -150px;
+		position: absolute;
+		z-index: 2;
+		
+	}
+	/*this is the css controlling the scroll bar*/
+	.scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
+  .scroll-bar-wrap .ui-slider { background: white; border:0; height: 2em; margin: 0 auto;  }
+  .scroll-bar-wrap .ui-handle-helper-parent { position: relative; width: 100%; height: 100%; margin: 0 auto; }
+  .scroll-bar-wrap .ui-slider-handle { top:.2em; height: 1.5em; }
+  .scroll-bar-wrap .ui-slider-handle .ui-icon { margin: -8px auto 0; position: relative; top: 50%; }	
+	</style>
+</head>
+<body>
+	<div id="container">
+	<!-- <div class="scroll-pane"> -->
+	<div class="scroll-pane ui-widget ui-widget-header ui-corner-all"> 
+			
+	<div id="background">
+		<img src="Assets/CoverPhoto.jpg" alt="CoverPhoto">
+	</div><!--end background-->
+	
+	<div class="scroll-content">
+		
+		<div id="josh_daiek" class="athletes">
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/JoshDaiek.png" alt="JoshDaiek"></a>
+		</div>
+		<div id="kevin_omeara" class="athletes">
+			<a href="http://powder.com" class="fancybox"><img src="Assets/png/KevinOMeara.png" alt="KevinOMeara"></a>
+		</div>
+		<div id="silas_chickeringayers" class="athletes">	
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/SilasChickeringAyers.png" alt="SilasChickeringAyers"></a>
+		</div>
+		<div id="lars_chickeringayers" class="athletes">
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/LarsChickeringAyers.png" alt="LarsChickeringAyers"></a>
+		</div>	
+		<div id="reine_barker" class="athletes">
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/ReineBarker.png" alt="ReineBarker"></a>
+		</div>
+		<div id="lopez" class="athletes">
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/Lopez.png" alt="Lopez"></a>
+		</div>
+		<div id="wallner" class="athletes">
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/Wallner1.png" alt="Wallner1"></a>
+		</div>
+		<div id="white" class="athletes">	
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/White.png" alt="White"></a>
+		</div>
+		<div id="drew_tabke" class="athletes">
+			<a href="http://www.powder.com" class="fancybox"><img src="Assets/png/DrewTabke1.png" alt="DrewTabke1"></a>
+		</div>
+		
+	</div><!--end scroll content-->
+	
+
+
+	</div><!--end scroll pane-->
+	<!-- /*This is the scroll bar*/ -->
+	<div class="scroll-bar-wrap ui-widget-content ui-corner-bottom">
+    <div class="scroll-bar"></div>
+  </div><!--end scroll bar wrap-->
+
+	</div><!--end of container-->
+
+</body>
+</html>
